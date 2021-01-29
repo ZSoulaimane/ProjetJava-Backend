@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Administrateur {
+public class Admin {
 
     private Long id;
     private String nom;

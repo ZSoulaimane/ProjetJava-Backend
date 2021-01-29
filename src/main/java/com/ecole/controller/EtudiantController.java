@@ -1,6 +1,7 @@
 package com.ecole.controller;
 
 import com.ecole.model.Etudiant;
+import com.ecole.model.Parent;
 import com.ecole.service.EtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,4 +45,8 @@ public class EtudiantController {
         etudiantService.supprimerEtudiant(id);
     }
 
+    @GetMapping("parent/{id}")
+    public Parent getParent(@PathVariable("id") Long id){
+        return etudiantService.getParent(id);
+    }
 }

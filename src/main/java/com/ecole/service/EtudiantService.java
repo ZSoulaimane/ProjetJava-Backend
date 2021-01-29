@@ -2,6 +2,7 @@ package com.ecole.service;
 
 import com.ecole.dao.EtudiantRepository;
 import com.ecole.model.Etudiant;
+import com.ecole.model.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,11 @@ public class EtudiantService {
             etudiant.setId(id);
             return etudiantRepository.save(etudiant);
         }else return etOp.get();
+    }
+
+    public Parent getParent(Long id){
+        Etudiant et = etudiantRepository.findById(id).get();
+        return et.getParent();
     }
 
     public Etudiant etudiantsById(Long id) {

@@ -1,5 +1,7 @@
 package com.ecole.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,8 +34,9 @@ public class Etudiant implements Serializable {
     @Column(length = 25, nullable = false)
     private Date dateNaissance;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "parent_id", nullable = false)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.ALL)
+    @JoinColumn(name = "parent_id")
     private Parent parent;
     private Long classeId;
     @Column(length = 100)
