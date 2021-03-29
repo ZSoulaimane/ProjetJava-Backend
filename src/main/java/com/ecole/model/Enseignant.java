@@ -5,7 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.ForeignKey;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -14,15 +20,27 @@ import java.io.Serializable;
 public class Enseignant implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Column(nullable = false)
     private String nom;
+    
     @Column(nullable = false)
     private String prenom;
+    
     @Column(nullable = false)
-    private Long matierId;
+    private String matier;
+    
+    @Column
+    private int nbrAbs;
+    
     @Column(nullable = false)
     private String photoUrl;
-    private String user;
+    
+    
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_name")
+    private User user;
 }

@@ -17,8 +17,11 @@ public class ParentService {
         this.parentRepository = parentRepository;
     }
 
-
-    public List<Parent> getParent() {
+    public List<Parent> getAllParents() {
         return parentRepository.findAll();
+    }
+    
+    public Parent getParent(Long id) {
+    	return  parentRepository.findById(id).get();
     }
 }

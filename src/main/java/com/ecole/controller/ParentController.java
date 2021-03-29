@@ -4,6 +4,7 @@ import com.ecole.model.Parent;
 import com.ecole.service.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,9 +22,14 @@ public class ParentController {
         this.parentService = parentService;
     }
 
-    @GetMapping
-    public List<Parent> getParent(){
-        return parentService.getParent();
+    @GetMapping("all")
+    public List<Parent> getAllParents(){
+        return parentService.getAllParents();
+    }
+    
+    @GetMapping("{id}")
+    public Parent getParent(@PathVariable Long id) {
+    	return parentService.getParent(id);
     }
 }
 

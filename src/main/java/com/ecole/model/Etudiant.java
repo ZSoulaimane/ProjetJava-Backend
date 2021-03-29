@@ -19,7 +19,7 @@ import java.sql.Date;
 public class Etudiant implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 25, nullable = false)
@@ -28,19 +28,36 @@ public class Etudiant implements Serializable {
     @Column(length = 25, nullable = false)
     private String prenom;
 
-    @Column(nullable = false)
-    private int age;
-
+    @Column
+    private int nbrAbs;
+    
+    @Column
+    private Double noteS1;
+    
+    @Column
+    private Double noteS2;
+    
+    @Column
+    private Double noteTotal;
+    
     @Column(length = 25, nullable = false)
     private Date dateNaissance;
-
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.ALL)
-    @JoinColumn(name = "parent_id")
-    private Parent parent;
-    private Long classeId;
+    
     @Column(length = 100)
     private String photoUrl;
-    @Column(length = 25)
-    private String user;
+    
+    @JsonBackReference(value = "parent")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false,cascade = CascadeType.ALL)
+    @JoinColumn(name = "parent_id")
+    private Parent parent;
+    
+    @JsonBackReference(value = "classe")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.ALL)
+    @JoinColumn(name = "classe_id")
+    private Classe classe;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_name")
+    private User user;
+    
 }

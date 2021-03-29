@@ -3,7 +3,7 @@ package com.ecole.controller;
 import com.ecole.model.Etudiant;
 import com.ecole.model.Parent;
 import com.ecole.service.EtudiantService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class EtudiantController {
 
     private EtudiantService etudiantService;
 
-    @Autowired
+    //@Autowired
     public EtudiantController(EtudiantService etudiantService){
         this.etudiantService = etudiantService;
     }
@@ -34,13 +34,19 @@ public class EtudiantController {
 
         etudiantService.ajouterEtudiant(etudiant);
     }
+    
+    @PostMapping("save/parent/{id}")
+    public void ajouterEtudiant2(@RequestBody Etudiant etudiant){
 
-    @PutMapping("change/{id}")
-    public Etudiant modifierEtudiant(@PathVariable("id") Long id,@RequestBody Etudiant etudiant){
-        return etudiantService.modifierEtudiant(id,etudiant);
+        etudiantService.ajouterEtudiant(etudiant);
     }
 
-    @DeleteMapping("delete/{id}")
+    @PutMapping("change")
+    public Etudiant modifierEtudiant(@RequestBody Etudiant etudiant){
+        return etudiantService.modifierEtudiant(etudiant);
+    }
+
+    @DeleteMapping("{id}")
     public void supprimerEtudiant(@PathVariable("id") Long id){
         etudiantService.supprimerEtudiant(id);
     }

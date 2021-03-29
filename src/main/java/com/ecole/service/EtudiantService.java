@@ -5,12 +5,12 @@ import com.ecole.model.Etudiant;
 import com.ecole.model.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Null;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Transactional
 public class EtudiantService {
 
     private EtudiantRepository etudiantRepository;
@@ -29,12 +29,8 @@ public class EtudiantService {
         return etudiantRepository.findAll();
     }
 
-    public Etudiant modifierEtudiant(Long id, Etudiant etudiant) {
-        Optional<Etudiant> etOp = etudiantRepository.findById(id);
-        if(etOp.isPresent()){
-            etudiant.setId(id);
-            return etudiantRepository.save(etudiant);
-        }else return etOp.get();
+    public Etudiant modifierEtudiant(Etudiant etudiant) {
+    	return etudiantRepository.save(etudiant);
     }
 
     public Parent getParent(Long id){

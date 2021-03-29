@@ -19,12 +19,17 @@ public class Parent implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Etudiant> etudiants;
+    
+    @Column(nullable = false)
     private String nomMere;
+    
+    @Column(nullable = false)
     private String nomPere;
+    
+    @Column(nullable = false)
     private int numTel;
-    private String user;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_name")
+    private User user;
 }
